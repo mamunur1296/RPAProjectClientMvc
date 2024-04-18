@@ -1,0 +1,71 @@
+﻿@model IEnumerable<RPA.Models.Chapter>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="content-header">
+        <div class="header-icon">
+            <i class="fa fa-users"></i>
+        </div>
+        <div class="header-title">
+            <h1>Chapter</h1>
+            <small>Chapter List</small>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12 pinpin">
+                <div class="card lobicard" data-sortable="true">
+                    <div class="card-header">
+                        <div class="card-title custom_title">
+                            <h4>Add Chapter</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+                        <div class="btn-group d-flex" role="group">
+                            <div class="buttonexport" id="buttonlist">
+                                <a class="btn btn-add" asp-action="Create">
+                                    <i class="fa fa-plus"></i> Add Chapter
+                                </a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
+                                <thead class="back_table_color">
+                                    <tr class="info">
+                                        <th>@Html.DisplayNameFor(model => model.title)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.title)
+                                            </td>
+                                            <td>
+                                            <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1" onclick="location.href='@Url.Action("Edit", "Chapter", new { id = item.Id })'">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm"  onclick="location.href='@Url.Action("Delete", "Chapter", new { id = item.Id })'">
+                                                <i class="fa fa-trash-o"></i>
+                                            </button> 
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+ 

@@ -1,0 +1,58 @@
+﻿@model RPA.Models.ViewModel.TopicCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<section class="content-header">
+    <div class="header-icon">
+        <i class="fa fa-users"></i>
+    </div>
+    <div class="header-title">
+        <h1>Add Chapter</h1>
+        <small>Chapter list</small>
+    </div>
+</section>
+<hr />
+
+<div class="content">
+    <div class="row">
+        <!-- Form controls -->
+        <div class="col-sm-12">
+            <div class="card lobicard all_btn_card" id="lobicard-custom-control1" data-sortable="true">
+                <div class="card-header all_card_btn">
+                    <div class="card-title custom_title">
+                        <a asp-action="Index" class="btn btn-add"><i class="fa fa-list"></i> Customer List </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" class="col-sm-6">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="Topic.title" class="control-label"></label>
+                            <input asp-for="Topic.title" class="form-control" />
+                            <span asp-validation-for="Topic.title" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Chapter"></label>
+                            <select class="form-control" asp-for="Topic.Chapterid">
+                                <option value="">Select Chapter</option>
+                                @foreach (var chapter in Model.Chapter)
+                                {
+                                    <option value="@chapter.Id">@chapter.title</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="reset-button">
+                            <a asp-action="Index" class="btn btn-warning"> Reset</a>
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
