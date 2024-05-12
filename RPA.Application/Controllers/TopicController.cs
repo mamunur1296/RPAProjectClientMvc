@@ -25,17 +25,29 @@ namespace RPA.Application.Controllers
         public async Task<IActionResult>  Create()
         {
             var chapter = await _unitOfWorkServices.chapterServiceRepogitory.GetAllAsync("Chapter/getAllChapter");
+            if (chapter != null)
+            {
             var topicCreateviewModel = new TopicCreateViewModel();
             topicCreateviewModel.Chapter = chapter;
-            return View(topicCreateviewModel);
+            return View(topicCreateviewModel);   
+            }
+            return View();
         }
 
         // POST: /Customer/Create
         [HttpPost]
         public async Task<IActionResult> Create(TopicCreateViewModel model)
         {
-            bool result = await _unitOfWorkServices.topicServiceRepogitory.AddAsync(model.Topic, "Topic/Create");
-            return result ? RedirectToAction("Index") : RedirectToAction("Error");
+            if (ModelState.IsValid)
+            {
+                bool result = await _unitOfWorkServices.topicServiceRepogitory.AddAsync(model.Topic, "Topic/Create");
+                return result ? RedirectToAction("Index") : RedirectToAction("Error");
+            }
+            else
+            {
+                return View(default);
+            }
+
         }
         // GET: /Customer/Details/{id}
         [HttpGet]

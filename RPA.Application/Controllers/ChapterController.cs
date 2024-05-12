@@ -30,8 +30,16 @@ namespace RPA.Application.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Chapter customer)
         {
-            bool result = await _unitOfWorkServices.chapterServiceRepogitory.AddAsync(customer, "Chapter/Create");
-            return result ? RedirectToAction("Index") : RedirectToAction("Error");
+            if(ModelState.IsValid)
+            {
+                bool result = await _unitOfWorkServices.chapterServiceRepogitory.AddAsync(customer, "Chapter/Create");
+                return result ? RedirectToAction("Index") : RedirectToAction("Error");
+            }
+            else
+            {
+                return View(default);
+            }
+
         }
         // GET: /Customer/Details/{id}
         [HttpGet]
